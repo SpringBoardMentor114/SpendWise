@@ -25,10 +25,6 @@ public class UserController {
 
     @PostMapping("users")
     public User createUser(@RequestBody User user) {
-        if (user.getId() != 0) {
-            return userServiceImpl.updateUser(null, user);
-        }
-        
         return userServiceImpl.createUser(user);
     }
 
@@ -43,7 +39,7 @@ public class UserController {
     }
 
     @PutMapping("users/{id}")
-    public User putMethodName(@PathVariable Long id, @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userServiceImpl.updateUser(id, user);
     }
     
