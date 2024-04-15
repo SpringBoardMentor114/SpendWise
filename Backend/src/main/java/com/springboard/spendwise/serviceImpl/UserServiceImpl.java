@@ -3,6 +3,8 @@ package com.springboard.spendwise.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.springboard.spendwise.model.User;
@@ -21,8 +23,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public User updateUser(Long id, User user){
-        User existingUser = userRepository.findById(id).get();
+    public User updateUser(String email, User user){
+        User existingUser = userRepository.findByEmail(email);
         if (existingUser != null) { 
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
@@ -40,7 +42,17 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById((long) id);
+    public void deleteUser(String email) {
+        userRepository.deleteByEmail(email);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("Invalid Username or Password.");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), null);
+    }
+
 }

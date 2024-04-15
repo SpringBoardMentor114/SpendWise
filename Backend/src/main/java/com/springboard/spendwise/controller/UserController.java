@@ -3,6 +3,7 @@ package com.springboard.spendwise.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboard.spendwise.model.User;
@@ -13,34 +14,38 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 
 
 
 @RestController
+@RequestMapping("/register/users")
+@Validated
 public class UserController {
     
     @Autowired
     UserService userServiceImpl;
 
-    @PostMapping("users")
+    @PostMapping("/users")
     public User createUser(@RequestBody User user) {
         return userServiceImpl.createUser(user);
     }
 
-    @GetMapping("users")
+    @GetMapping("/users")
     public List<User> getAllUsers() {
         return userServiceImpl.viewUsers();
     }
 
-    @DeleteMapping("users/{id}")
-    public void deleteUser(@PathVariable Long id){
-        userServiceImpl.deleteUser(id);
+    @DeleteMapping("/users/{email}")
+    public void deleteUser(@PathVariable String email){
+        userServiceImpl.deleteUser(email);
     }
 
-    @PutMapping("users/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userServiceImpl.updateUser(id, user);
+    @PutMapping("/users/{email}")
+    public User updateUser(@PathVariable String email, @RequestBody User user) {
+        return userServiceImpl.updateUser(email, user);
     }
     
     
