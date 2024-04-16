@@ -14,14 +14,41 @@
   
   .desktop .overlap-group {
     position: relative;
-    width: 500px;
-    height: 600px;
-    top: 80px;
-    left: 450px;
-    background-color: #d9d9d9;
-    border-radius: 10px;
-    border: 1px solid;
-    border-color: #080808;
+  width: 500px;
+  max-width: 90%; 
+  height: 600px;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #d9d9d9;
+  border-radius: 10px;
+  border: 1px solid;
+  border-color: #080808;
+  /* padding: 25px; */
+  }
+  @media screen and (max-width: 768px) {
+    .desktop .overlap-group {
+      width: 90%;
+      height: auto;
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      /* padding:10px; */
+    }
+    
+  }
+  
+  
+  @media screen and (max-width: 480px) {
+    .desktop .overlap-group {
+      width: 90%;
+      height: auto;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      /* padding: 5px; */
+    }
+   
   }
   
   .desktop .text-wrapper {
@@ -29,7 +56,7 @@
     width: 427px;
     height: 117px;
     top: 12px;
-    left: 40px;
+    left: 5%;
     font-family: "Inter-SemiBold", Helvetica;
     font-weight: 600;
     color: #0c054b;
@@ -116,7 +143,7 @@
     width: 182px;
     height: 35px;
     top: 530px;
-    left: 170px;
+    left: 30%;
     font-family: "Inter-Regular", Helvetica;
     font-weight: 400;
     color:black;
@@ -137,10 +164,10 @@
   
   .desktop .text-wrapper-6 {
     position: absolute;
-    width: 146px;
+    width: auto ;
     height: 42px;
     top: 570px;
-    left:  170px;
+    left:  35%;
     font-family: "Inter-Regular", Helvetica;
     font-weight: 400;
     color: #000000;
@@ -148,12 +175,14 @@
     text-align: center;
     letter-spacing: 0;
     line-height: normal;
+    margin-left:5px;
   }
   
   .desktop .text-wrapper-7 {
     position: absolute;
+    width: auto ;
     top: 570px;
-    left: 290px;
+    left: 55%;
     font-family: "Inter-Bold", Helvetica;
     font-weight: 700;
     color: #0018f1;
@@ -167,6 +196,13 @@
     transition: background-color 0.3s ease;
   }
   
+ 
+  /* .desktop .text-wrapper-7 {
+    position: absolute;
+    top: 570px;
+    width: auto; 
+    margin-left:1%;
+  } */
   .desktop .text-wrapper-7:hover {
     background-color: lightgreen; 
   }
@@ -204,20 +240,21 @@
   #name{
     position: absolute;
     top: 165px; 
-    left: 70px;
+    left: 14%;
   }
   #email{
     position: absolute;
     top: 260px; 
-    left: 70px;
+    left: 14%;
   }
   #password{
     position: absolute;
     top: 360px; 
-    left: 70px;
+    left: 14%;
   }
   #confirmPassword{
     position: absolute;
     top: 460px; 
-    left: 70px;
+    left: 14%;
   }
+  
