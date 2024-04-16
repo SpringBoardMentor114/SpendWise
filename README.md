@@ -1,3 +1,7 @@
-# Login with postman
+# Login with Postman
 
-![alt text](<Screenshot 2024-04-16 202353.png>) ![alt text](<Screenshot 2024-04-16 203017.png>) ![alt text](<Screenshot 2024-04-16 203037.png>) ![alt text](<Screenshot 2024-04-16 203116.png>)
+![Database Screenshot](Screenshot_2024-04-16_202353.png)
+![Invalid API Screenshot](Screenshot_2024-04-16_203017.png)
+![Successful Login Screenshot](Screenshot_2024-04-16_203037.png)
+![Invalid Email Screenshot](Screenshot_2024-04-16_203116.png)
+
