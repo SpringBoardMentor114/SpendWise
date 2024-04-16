@@ -1,9 +1,5 @@
 package com.springboard.spendwise.model;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,16 +21,16 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
+
     @Column(name = "first_name")
-    @NotBlank(message = "First name is required")
     private String firstName;
+
     @Column(name = "last_name")
-    @NotBlank(message = "Last name is required")
     private String lastName;
+
     @Column(name = "email")
-    @Email(message = "Invalid email format")
     private String email;
-    @NotBlank(message = "Password is required")
-    @Size(min = 6, message = "Password must be 6 character long")
+
+    @Column(name = "password")
     private String password;
 }
