@@ -1,27 +1,16 @@
-# SpendWise
+# Login with Postman
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
+![Database Screenshot]
+![Screenshot 2024-04-16 202353](https://github.com/sameer-bagde/SpendWise/assets/144990200/ecf86c45-dfaa-4ede-a92e-0d2ae018416d)
 
-## Development server
+![Invalid API Screenshot]
+![Screenshot 2024-04-16 203017](https://github.com/sameer-bagde/SpendWise/assets/144990200/793f640f-da75-4669-9ec2-438102ef2d5b)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+![Successful Login Screenshot]
+![Screenshot 2024-04-16 203037](https://github.com/sameer-bagde/SpendWise/assets/144990200/c3cf2cb2-f40a-43d9-97ba-208ef86ff4f8)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![Invalid Email Screenshot]
+![Screenshot 2024-04-16 203116](https://github.com/sameer-bagde/SpendWise/assets/144990200/0ceaa612-ceee-4b27-ae12-732bd8c8aa49)
