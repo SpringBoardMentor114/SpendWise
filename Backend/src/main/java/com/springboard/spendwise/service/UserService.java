@@ -7,6 +7,7 @@ import com.springboard.spendwise.response.LoginResponse;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,11 +16,10 @@ public interface UserService {
 
     LoginResponse loginUser(LoginDTO loginDTO);
 
-    User updateUser(String email, User user);
-
-    void deleteUser(String email);
-
-    List<User> viewUsers();
-
+    // Kunal work for registration
     User createUser(User user);
+    User updateUser(String email, User user);
+    List<User>viewUsers();
+    void deleteUser(String email);
+    UserDetails loadUserByUsername(String username);
 }
