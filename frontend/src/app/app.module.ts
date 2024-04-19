@@ -10,6 +10,8 @@ import { CMIComponent } from './cmi/cmi.component';
 import { LoggingComponent } from './expenses/logging/logging.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { EditingComponent } from './expenses/editing/editing.component';
+import { FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { EditingComponent } from './expenses/editing/editing.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
