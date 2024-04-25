@@ -1,120 +1,30 @@
-<p><!DOCTYPE html>
-    <html>
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <link rel="stylesheet" href="./login.component.css" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;600;700&display=swap"
-        />
-        <style>
-            .btn {
-                width: 50%;
-        padding: 8px;
-        font-size: 16px;
-        background-color: #48cae4;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-            }
-    .btn:hover {
-      background-color: #0056b3; 
-    }
-        </style>
-      </head>
-      <body>
-        <div class="desktop-1">
-          <img class="vector-icon" alt="" src="./public/vector.svg" />
-    
-          <div class="to-parent">
-            <h1 class="to">To</h1>
-            <div class="frame-wrapper">
-              <div class="welcome-parent">
-                <h1 class="welcome">Welcome</h1>
-                <div class="wrapper-email-input">
-                  <img
-                    class="email-input-icon"
-                    loading="lazy"
-                    alt=""
-                    src="./public/vector.svg"
-                  />
-                </div>
+<p>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title> Login Page</title>
+      <link rel="stylesheet" href="login.component.css">
+  </head>
+  <body>
+      <div class="container">
+          <h1>Login Form</h1>
+          <p> Welcome Back ! Please Login with Your Creditials </p>
+  
+          <form action="">
+              <input type="email" id="email" name = "email" placeholder="Email">
+              <input type="password" id="password" name="password" placeholder="Password">
+              <div class="forgetpass">
+                  <a href="PassReset">Forget Password</a>
               </div>
-            </div>
-            <div class="password-input">
-              <h1 class="spendwise">SpendWise</h1>
-              <div class="wrapper-login-call-to-action">
-                <img
-                  class="login-call-to-action"
-                  loading="lazy"
-                  alt=""
-                  src="./public/vector-1.svg"
-                />
-              </div>
-            </div>
+              <button type="submit"> Login </button>
+          </form>
+          
+          <div class="signup"> 
+              Don't Have an Account ? <a href="Registration"> Signup</a>
           </div>
-          <div class="desktop-1-inner">
-            <div class="frame-parent">
-              <div class="frame-container">
-                <div class="login-parent">
-                <form action="">
-                  <div><h1 class="login">Login</h1></div>
-                  <div class="welcome-back" style="text-align: left;">
-                    Welcome back ! Please login with Your Credentials
-                  </div>
-                </div>
-              </div>
-              <div class="sign-in-button">
-                <div class="new-user-label">
-                  <div class="signup-call-to-action">
-                    <div class="frame-group">
-                      <div class="email-wrapper">
-                        <div class="email">Email</div>
-                      </div>
-                      <input
-                        class="frame-child"
-                        placeholder="abc@gmail.com"
-                        type="text"
-                      />
-                    </div>
-                    <div class="password-parent">
-                      <div class="password">Password</div>
-                      <input
-                        class="frame-item"
-                        placeholder="********"
-                        type="password"
-                      />
-                    </div>
-                    <div class="logout-button">
-                      <div class="settings-call-to-action">
-                        <div class="settings-call-to-action-inner">
-                        
-                        </div>
-                        <div class="mb-3 form-check">
-                            <label class="form-check-label" for="exampleCheck1"> <a href="" style="text-decoration: none;">Forget Password</a></label>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button class="new-feature-label">
-                    <div class="login1">Login</div>
-                  </button>
-              </div>
-              <div class="feature-description-wrapper">
-                <div class="feature-description">
-                  <div class="settings-menu-label">
-                    <div class="new-user">New User ?</div>
-                  </div>
-                  <div class="signup"> <a href="" style="text-decoration: none;">Signup</a></div>
-                </div>
-              </div>
-            </div>
-        </form>
-          </div>
-        </div>
-      </body>
-    </html>
+      </div>
+  </body>
+  </html>
     </p>

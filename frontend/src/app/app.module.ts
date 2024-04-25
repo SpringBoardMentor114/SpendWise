@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import{Routes,RouterModule} from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -12,6 +12,14 @@ import { ExpenseListComponent } from './expenses/expense-list/expense-list.compo
 import { EditingComponent } from './expenses/editing/editing.component';
 import { FormsModule } from '@angular/forms';
 
+const routes: Routes = [
+  {path:'', redirectTo:'Login',pathMatch:'full'} ,
+  {path:'Registration',component:RegistrationComponent},
+  {path:'PassReset',component:PassresetComponent},
+  {path:'Login',component:LoginComponent},
+  {path:'**',component:LoginComponent}
+
+];
 
 @NgModule({
   declarations: [
@@ -27,9 +35,10 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent,]
 })
 export class AppModule { }
