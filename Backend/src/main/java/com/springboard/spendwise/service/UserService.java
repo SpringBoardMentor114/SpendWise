@@ -18,8 +18,8 @@ public interface UserService {
 
     // Kunal work for registration
     User createUser(User user);
-    User updateUser(String email, User user);
+    User updateUser(Long id, User user);
     List<User>viewUsers();
-    void deleteUser(String email);
+    void deleteUser(Long id);
     UserDetails loadUserByUsername(String username);
 }

@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User updateUser(String email, User user){
-        User existingUser = userRepository.findByEmail(email);
+    public User updateUser(Long id, User user){
+        User existingUser = userRepository.findById(id).get();
         if (existingUser != null) { 
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
@@ -45,8 +45,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void deleteUser(String email) {
-        userRepository.deleteByEmail(email);
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 
     @Override

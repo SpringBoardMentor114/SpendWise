@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/register/users")
+@RequestMapping("spendwise/register")
 @Validated
 public class UserController {
 
 // kunal work for registration
     @Autowired
-    private UserService userService;
+    UserService userService;
 
     @Autowired
     UserService userServiceImpl;
@@ -44,14 +44,14 @@ public class UserController {
         return userServiceImpl.viewUsers();
     }
 
-    @DeleteMapping("/users/{email}")
-    public void deleteUser(@PathVariable String email){
-        userServiceImpl.deleteUser(email);
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable Long id){
+        userServiceImpl.deleteUser(id);
     }
 
-    @PutMapping("/users/{email}")
-    public User updateUser(@PathVariable String email, @RequestBody User user) {
-        return userServiceImpl.updateUser(email, user);
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+        return userServiceImpl.updateUser(id, user);
     }
 
 // login (use api http://localhost:8085/register/users/login) or using use (/user/login) by changing the @RequestMapping path
