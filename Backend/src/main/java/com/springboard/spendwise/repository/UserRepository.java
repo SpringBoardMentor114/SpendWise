@@ -9,7 +9,6 @@ import com.springboard.spendwise.model.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     // kunal work for registration
     User findByEmail(String email);
-    void deleteByEmail(String email);
     
 // login
     User findByEmailAndPassword(String email, String password);
