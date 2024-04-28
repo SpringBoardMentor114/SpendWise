@@ -1,8 +1,8 @@
 package com.springboard.spendwise.model;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -42,4 +42,5 @@ public class User{
     @NotBlank(message = "Password is required")
     @Size(min = 6, message = "Password must be 6 character long")
     private String password;
+
 }
