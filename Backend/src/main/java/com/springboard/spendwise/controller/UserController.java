@@ -6,8 +6,11 @@ import com.springboard.spendwise.model.User;
 import com.springboard.spendwise.response.LoginResponse;
 import com.springboard.spendwise.service.UserService;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 // import org.springframework.web.bind.annotation.*; 
@@ -17,7 +20,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,22 +37,27 @@ public class UserController {
     UserService userServiceImpl;
 
     @PostMapping("/users")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@Valid @RequestBody User user) {
         return userServiceImpl.createUser(user);
     }
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userServiceImpl.viewUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        return new ResponseEntity<>(userServiceImpl.viewUsers(), HttpStatus.FOUND);
     }
+
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable Long id){
+        return userServiceImpl.getUserById(id);
+    }    
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id){
         userServiceImpl.deleteUser(id);
     }
 
-    @PutMapping("/users/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
+    @PostMapping("/users/{id}/update")
+    public User updateUser(@Valid @PathVariable Long id, @Valid @RequestBody User user) {
         return userServiceImpl.updateUser(id, user);
     }
 
