@@ -7,7 +7,6 @@ import com.springboard.spendwise.response.LoginResponse;
 
 import java.util.List;
 
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,5 +20,5 @@ public interface UserService {
     User updateUser(Long id, User user);
     List<User>viewUsers();
     void deleteUser(Long id);
-    UserDetails loadUserByUsername(String username);
+    User getUserById(Long id);
 }

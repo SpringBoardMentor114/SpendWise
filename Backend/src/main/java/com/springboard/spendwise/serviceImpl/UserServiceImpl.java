@@ -3,19 +3,20 @@ package com.springboard.spendwise.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.springboard.spendwise.Dto.LoginDTO;
+import com.springboard.spendwise.exception.UserAlreadyExistsException;
+import com.springboard.spendwise.exception.UserNotFoundException;
 import com.springboard.spendwise.model.User;
 import com.springboard.spendwise.repository.UserRepository;
 import com.springboard.spendwise.response.LoginResponse;
 import com.springboard.spendwise.service.UserService;
+import lombok.RequiredArgsConstructor;
 
 @Service
-public class UserServiceImpl implements UserService, UserDetailsService {
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService{
     
     @Autowired
     UserRepository userRepository;
@@ -23,40 +24,57 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     // Kunal work for registration
     @Override
     public User createUser(User user){
+        if (userAlreadyExists(user.getEmail())){
+            throw  new UserAlreadyExistsException("User already exists with the E-mail : " + user.getEmail());
+        }
         return userRepository.save(user);
     }
 
-    @Override
-    public User updateUser(Long id, User user){
-        User existingUser = userRepository.findById(id).get();
-        if (existingUser != null) { 
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setEmail(user.getEmail());
-            existingUser.setPassword(user.getPassword());
-            userRepository.save(existingUser);
-        }
-        return null;
+    private boolean userAlreadyExists(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
     }
+
 
     @Override
     public List<User> viewUsers() {
         return userRepository.findAll();
     }
+    
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Sorry, no user found with the Id :" +id));
+    }
+
+    @Override
+    public User updateUser(Long id, User user) {
+    User existingUser = userRepository.findById(id)
+                        .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+
+        if (!existingUser.getEmail().equals(user.getEmail())) {
+            if (userAlreadyExists(user.getEmail())) {
+                throw new UserAlreadyExistsException("User already exists with the email: " + user.getEmail());
+            }
+        }else{
+            existingUser.setFirstName(user.getFirstName());
+            existingUser.setLastName(user.getLastName());
+            existingUser.setEmail(user.getEmail());
+            existingUser.setPassword(user.getPassword());
+        }    
+        return userRepository.save(existingUser);
+    }
+
 
     @Override
     public void deleteUser(Long id) {
+        if (!userRepository.existsById(id)){
+            throw new UserNotFoundException("Sorry, user not found");
+        }
         userRepository.deleteById(id);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Invalid Username or Password.");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), null);
-    }
    // Kunal work
 
 // login
@@ -77,4 +95,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return new LoginResponse("Email does not exist", false);
         }
     }
+
 }
