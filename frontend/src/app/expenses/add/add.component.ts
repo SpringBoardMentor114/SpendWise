@@ -1,53 +1,52 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 
+interface FormData {
+  description: string;
+  category: string;
+  date: string;
+  amount: number;
+}
+
 @Component({
-  selector: 'app-editing',
-  templateUrl: './editing.component.html',
-  styleUrl: './editing.component.css'
-
+  selector: 'app-add',
+  templateUrl: './add.component.html',
 })
-export class EditingComponent {
-  formData = {
-    description: 'Default Description',
-    category: 'Food',
-    date: '2024-04-30', 
-    amount: 10
-  };
+export class AddComponent {
 
-  showAlert = false;
-  successAlert = false;
+  formData: FormData = {
+    description: '',
+    category: '',
+    date: '',
+    amount: 0
+  };
+submitted: any;
 
   constructor(private notification: NzNotificationService, private router: Router) {} 
 
   saveData() {
     if (this.validateForm()) {
-      const savedData = { ...this.formData };
+      const savedData = { ...this.formData }; 
       console.log('Form data is valid. Saving data:', savedData);
 
-      // Show success notification
-      this.notification.success('Success', 'Successfully Edit.');
+      this.notification.success('Success', 'Expense added successfully');
 
-      setTimeout(() => {
-        this.successAlert = false;
-      }, 3000); // Hide success alert after 3 seconds
+      this.formData = {
+        description: '',
+        category: '',
+        date: '',
+        amount: 0
+      };
       this.router.navigateByUrl('/spendwise/expense/list');
-
     } else {
-      this.showAlert = true;
+      this.notification.error('Error', 'Please fill all the fields correctly');
     }
-  }
-
-  closeAlert() {
-    this.showAlert = false;
   }
 
   validateForm(): boolean {
     let isValid = true;
 
-    // Validate description
     if (this.formData.description.trim().length < 3) {
       isValid = false;
     }

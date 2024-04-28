@@ -11,6 +11,16 @@ import { LoggingComponent } from './expenses/logging/logging.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { EditingComponent } from './expenses/editing/editing.component';
 import { FormsModule } from '@angular/forms';
+import { AddComponent } from './expenses/add/add.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideHttpClient } from '@angular/common/http';
+import { NzFormModule } from 'ng-zorro-antd/form';
+
+registerLocaleData(en);
 
 const routes: Routes = [
   {path:'', redirectTo:'Login',pathMatch:'full'} ,
@@ -30,15 +40,21 @@ const routes: Routes = [
     CMIComponent,
     LoggingComponent,
     ExpenseListComponent,
-    EditingComponent
+    EditingComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NzFormModule
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    provideAnimationsAsync(),
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }
