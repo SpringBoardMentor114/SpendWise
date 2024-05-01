@@ -17,7 +17,7 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { NzFormModule } from 'ng-zorro-antd/form';
 
 registerLocaleData(en);
@@ -48,7 +48,8 @@ const routes: Routes = [
     AppRoutingModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    NzFormModule
+    NzFormModule,
+    HttpClientModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

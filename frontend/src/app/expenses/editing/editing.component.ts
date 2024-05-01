@@ -1,72 +1,76 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-
+import { DataService } from '../data.service';
+ 
 @Component({
   selector: 'app-editing',
   templateUrl: './editing.component.html',
-  styleUrl: './editing.component.css'
-
+  styleUrls: ['./editing.component.css']
 })
 export class EditingComponent {
   formData = {
     description: 'Default Description',
     category: 'Food',
-    date: '2024-04-30', 
+    date: '2024-04-30',
     amount: 10
   };
-
-  showAlert = false;
-  successAlert = false;
-
-  constructor(private notification: NzNotificationService, private router: Router) {} 
-
+ 
+ 
+  constructor(
+    private notification: NzNotificationService,
+    private router: Router,
+    private http: HttpClient,
+    private dataService: DataService
+  ) {}
+ 
   saveData() {
     if (this.validateForm()) {
-      const savedData = { ...this.formData };
+      let savedData = { ...this.formData };
       console.log('Form data is valid. Saving data:', savedData);
-
-      // Show success notification
-      this.notification.success('Success', 'Successfully Edit.');
-
-      setTimeout(() => {
-        this.successAlert = false;
-      }, 3000); // Hide success alert after 3 seconds
-      this.router.navigateByUrl('/spendwise/expense/list');
-
-    } else {
-      this.showAlert = true;
+ 
+      // Replace expenseId with the actual ID of the expense you want to update
+      const expenseId = 1;
+ 
+      this.dataService.updateExpense(expenseId, savedData).subscribe(
+        (resultData: any) => {
+          console.log(resultData);
+          if (resultData.status) {
+            this.router.navigateByUrl('/spendwise/expense/list');
+            this.notification.success('Success', 'Expense updated successfully');
+          } else {
+            this.notification.error('Error', 'Failed to update expense');
+          }
+        },
+        (error: HttpErrorResponse) => {
+          console.error('Error occurred:', error);
+          if (error.status === 0) {
+            this.notification.error('Network Error', 'Unable to connect to the server. Please check your network connection.');
+          } else {
+            this.notification.error('Server Error', `An error occurred on the server: ${error.message}`);
+          }
+        }
+      );
     }
   }
-
-  closeAlert() {
-    this.showAlert = false;
-  }
-
+ 
+ 
+ 
   validateForm(): boolean {
     let isValid = true;
-
-    // Validate description
     if (this.formData.description.trim().length < 3) {
       isValid = false;
     }
-
-    // Validate category
     if (this.formData.category === '') {
       isValid = false;
     }
-
-    // Validate date
-    if (!this.formData.date) { // Assuming date should not be empty
+    if (!this.formData.date) {
       isValid = false;
     }
-
-    // Validate amount
     if (isNaN(this.formData.amount) || this.formData.amount <= 0) {
       isValid = false;
     }
-
     return isValid;
   }
-}
+} 
