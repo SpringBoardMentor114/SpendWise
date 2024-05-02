@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class CustomExceptionHandler {
+public class GlobalExceptionHandler {
     
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -23,16 +23,16 @@ public class CustomExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(UserNotFoundException.class)
-    public Map<String, String> userNotFound(UserNotFoundException ex){
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public Map<String, String> userNotFound(ResourceNotFoundException ex){
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return error;
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(UserAlreadyExistsException.class)
-    public Map<String, String> userNotFound(UserAlreadyExistsException ex){
+    @ExceptionHandler(ResourceAlreadyExistsException.class)
+    public Map<String, String> userNotFound(ResourceAlreadyExistsException ex){
         Map<String, String> error = new HashMap<>();
         error.put("error", ex.getMessage());
         return error;
