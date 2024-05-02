@@ -31,17 +31,14 @@ export class AddComponent {
       let savedData = { ...this.formData };
       console.log('Form data is valid. Saving data:', savedData);
   
-      // Replace expenseId with the actual ID of the expense you want to update
-      const expenseId = 1;
-  
-      this.dataService.updateExpense(expenseId, savedData).subscribe(
+      this.dataService.addExpense(savedData).subscribe(
         (resultData: any) => {
           console.log(resultData);
           if (resultData.status) {
             this.router.navigateByUrl('/spendwise/expense/list');
-            this.notification.success('Success', 'Expense updated successfully');
+            this.notification.success('Success', 'Expense added successfully');
           } else {
-            this.notification.error('Error', 'Failed to update expense');
+            this.notification.error('Error', 'Please fill all the fields correctly');
           }
         },
         (error: HttpErrorResponse) => {
