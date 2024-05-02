@@ -24,15 +24,12 @@ export class DataService {
 
   constructor(private http: HttpClient) { }
  
-  addExpense(formData: FormData): Observable<FormData> {
+  addExpense(formData: FormData) : Observable <FormData>{
     return this.http.post<FormData>(`${this.apiUrl}/add`, formData, this.httpOptions);
   }
  
-  updateExpense(id: number, formData: FormData): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update/${id}`, formData , this.httpOptions);
+  updateExpense(id: number, formData: FormData) : Observable <FormData>{
+    return this.http.put <FormData>(`${this.apiUrl}/update/${id}`, formData , this.httpOptions);
   }
  
-  deleteExpense(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/delete/${id}`, this.httpOptions);
-  }
 }

@@ -27,20 +27,18 @@ export class EditingComponent {
  
   saveData() {
     if (this.validateForm()) {
-      let savedData = { ...this.formData };
+      const savedData = JSON.parse(JSON.stringify(this.formData)); 
       console.log('Form data is valid. Saving data:', savedData);
  
-      // Replace expenseId with the actual ID of the expense you want to update
       const expenseId = 1;
- 
+
       this.dataService.updateExpense(expenseId, savedData).subscribe(
-        (resultData: any) => {
-          console.log(resultData);
-          if (resultData.status) {
+        (response: any) => {
+          if (response.status) {
             this.router.navigateByUrl('/spendwise/expense/list');
             this.notification.success('Success', 'Expense updated successfully');
           } else {
-            this.notification.error('Error', 'Failed to update expense');
+            this.notification.error('Error', response.error || 'An error occurred while updating the expense');
           }
         },
         (error: HttpErrorResponse) => {
@@ -52,7 +50,12 @@ export class EditingComponent {
           }
         }
       );
+
     }
+    
+ else {
+  this.notification.error('Error', 'Please fill all the fields correctly');
+}
   }
  
  

@@ -28,17 +28,16 @@ export class AddComponent {
  
   saveData() {
     if (this.validateForm()) {
-      let savedData = { ...this.formData };
+      const savedData = JSON.parse(JSON.stringify(this.formData)); 
       console.log('Form data is valid. Saving data:', savedData);
-  
+
       this.dataService.addExpense(savedData).subscribe(
-        (resultData: any) => {
-          console.log(resultData);
-          if (resultData.status) {
+        (response: any) => {
+          if (response.success) {
             this.router.navigateByUrl('/spendwise/expense/list');
             this.notification.success('Success', 'Expense added successfully');
           } else {
-            this.notification.error('Error', 'Please fill all the fields correctly');
+            this.notification.error('Error', response.error || 'An error occurred while adding the expense');
           }
         },
         (error: HttpErrorResponse) => {
@@ -50,6 +49,9 @@ export class AddComponent {
           }
         }
       );
+    }
+    else {
+      this.notification.error('Error', 'Please fill all the fields correctly');
     }
   }
  
