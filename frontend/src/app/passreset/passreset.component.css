@@ -1,5 +1,5 @@
 .div {
-    background-color: #000;
+    background-color: #015173;
     display:block;
     max-width: 476px;
     flex-direction: column;
@@ -21,7 +21,7 @@
     border-color: rgba(0, 0, 0, 1);
     border-style: solid;
     border-width: 1px;
-    background-color: #b5d2fd;
+    background-color: #82b5cb;
     display: flex;
     width: 70%;
     flex-direction: column;
@@ -76,7 +76,7 @@
 }
 
 .submit-btn {
-    background-color: #007bff;
+    background-color: #015173;
     color: #fff;
     border: none;
     padding: 10px 20px;

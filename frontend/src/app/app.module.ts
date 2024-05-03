@@ -12,15 +12,18 @@ import { LoggingComponent } from './expenses/logging/logging.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { EditingComponent } from './expenses/editing/editing.component';
 import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component'; 
 
 const routes: Routes = [
   {path:'', redirectTo:'Login',pathMatch:'full'} ,
   {path:'Registration',component:RegistrationComponent},
   {path:'PassReset',component:PassresetComponent},
   {path:'Login',component:LoginComponent},
-  {path:'**',component:LoginComponent}
+ 
+  {path:'Home',component:HomeComponent}
 
 ];
 
@@ -34,14 +37,16 @@ const routes: Routes = [
     CMIComponent,
     LoggingComponent,
     ExpenseListComponent,
-    EditingComponent
+    EditingComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    NgxChartsModule,
 
   ],
   providers: [],
