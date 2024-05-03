@@ -33,32 +33,30 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    UserService userServiceImpl;
 
     @PostMapping("/users")
     public User createUser(@Valid @RequestBody User user) {
-        return userServiceImpl.createUser(user);
+        return userService.createUser(user);
     }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userServiceImpl.viewUsers(), HttpStatus.FOUND);
+        return new ResponseEntity<>(userService.viewUsers(), HttpStatus.FOUND);
     }
 
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable Long id){
-        return userServiceImpl.getUserById(id);
+        return userService.getUserById(id);
     }    
 
     @DeleteMapping("/users/{id}")
     public void deleteUser(@PathVariable Long id){
-        userServiceImpl.deleteUser(id);
+        userService.deleteUser(id);
     }
 
     @PostMapping("/users/{id}/update")
     public User updateUser(@Valid @PathVariable Long id, @Valid @RequestBody User user) {
-        return userServiceImpl.updateUser(id, user);
+        return userService.updateUser(id, user);
     }
 
 // login (use api http://localhost:8085/register/users/login) or using use (/user/login) by changing the @RequestMapping path
