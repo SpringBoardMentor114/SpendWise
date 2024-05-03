@@ -3,11 +3,12 @@ package com.springboard.spendwise.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.springboard.spendwise.Dto.LoginDTO;
-import com.springboard.spendwise.exception.UserAlreadyExistsException;
-import com.springboard.spendwise.exception.UserNotFoundException;
+import com.springboard.spendwise.exception.ResourceAlreadyExistsException;
+import com.springboard.spendwise.exception.ResourceNotFoundException;
 import com.springboard.spendwise.model.User;
 import com.springboard.spendwise.repository.UserRepository;
 import com.springboard.spendwise.response.LoginResponse;
@@ -21,12 +22,17 @@ public class UserServiceImpl implements UserService{
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     // Kunal work for registration
     @Override
     public User createUser(User user){
         if (userAlreadyExists(user.getEmail())){
-            throw  new UserAlreadyExistsException("User already exists with the E-mail : " + user.getEmail());
+            throw  new ResourceAlreadyExistsException("User already exists with the E-mail : " + user.getEmail());
         }
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         return userRepository.save(user);
     }
 
@@ -45,24 +51,28 @@ public class UserServiceImpl implements UserService{
     @Override
     public User getUserById(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("Sorry, no user found with the Id :" +id));
+                .orElseThrow(() -> new ResourceNotFoundException("Sorry, no user found with the Id :" +id));
     }
 
     @Override
     public User updateUser(Long id, User user) {
     User existingUser = userRepository.findById(id)
-                        .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+                        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
         if (!existingUser.getEmail().equals(user.getEmail())) {
             if (userAlreadyExists(user.getEmail())) {
-                throw new UserAlreadyExistsException("User already exists with the email: " + user.getEmail());
+                throw new ResourceAlreadyExistsException("User already exists with the email: " + user.getEmail());
             }
-        }else{
-            existingUser.setFirstName(user.getFirstName());
-            existingUser.setLastName(user.getLastName());
-            existingUser.setEmail(user.getEmail());
-            existingUser.setPassword(user.getPassword());
-        }    
+        }
+        
+        existingUser.setFirstName(user.getFirstName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setEmail(user.getEmail());
+        if (user.getPassword() != null) {
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            existingUser.setPassword(encodedPassword);
+        }
+        
         return userRepository.save(existingUser);
     }
 
@@ -70,7 +80,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)){
-            throw new UserNotFoundException("Sorry, user not found");
+            throw new ResourceNotFoundException("Sorry, user not found");
         }
         userRepository.deleteById(id);
     }
