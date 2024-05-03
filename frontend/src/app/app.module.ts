@@ -14,6 +14,8 @@ import { EditingComponent } from './expenses/editing/editing.component';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+
+
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component'; 
 
@@ -47,9 +49,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgxChartsModule,
+ 
 
   ],
-  providers: [],
+  providers: [ ],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }
