@@ -15,7 +15,16 @@ import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { ReactiveFormsModule } from '@angular/forms';
-import { HomeComponent } from './home/home.component'; 
+// import { HomeComponent } from './home/home.component'; 
+import { AddComponent } from './expenses/add/add.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+
+registerLocaleData(en);
 
 const routes: Routes = [
   {path:'', redirectTo:'Login',pathMatch:'full'} ,
@@ -23,7 +32,7 @@ const routes: Routes = [
   {path:'PassReset',component:PassresetComponent},
   {path:'Login',component:LoginComponent},
  
-  {path:'Home',component:HomeComponent}
+  // {path:'Home',component:HomeComponent}
 
 ];
 
@@ -38,7 +47,7 @@ const routes: Routes = [
     LoggingComponent,
     ExpenseListComponent,
     EditingComponent,
-    HomeComponent
+    AddComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +56,14 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgxChartsModule,
-
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    provideAnimationsAsync(),
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent,]
 })
 export class AppModule { }
