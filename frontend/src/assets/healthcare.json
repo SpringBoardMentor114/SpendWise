@@ -1,0 +1,22 @@
+[
+    {"id": 1, "category": "Healthcare", "description": "Dental checkup", "amount": 150.00, "date": "2024-05-02"},
+    {"id": 2, "category": "Healthcare", "description": "Eye exam", "amount": 100.00, "date": "2024-05-04"},
+    {"id": 3, "category": "Healthcare", "description": "General physician visit", "amount": 120.00, "date": "2024-05-06"},
+    {"id": 4, "category": "Healthcare", "description": "Medication refill", "amount": 60.00, "date": "2024-05-08"},
+    {"id": 5, "category": "Healthcare", "description": "Physical therapy", "amount": 90.00, "date": "2024-05-10"},
+    {"id": 6, "category": "Healthcare", "description": "Emergency room visit", "amount": 300.00, "date": "2024-05-12"},
+    {"id": 7, "category": "Healthcare", "description": "Blood tests", "amount": 200.00, "date": "2024-05-14"},
+    {"id": 8, "category": "Healthcare", "description": "Vaccination", "amount": 50.00, "date": "2024-05-16"},
+    {"id": 9, "category": "Healthcare", "description": "Chiropractor session", "amount": 80.00, "date": "2024-05-18"},
+    {"id": 10, "category": "Healthcare", "description": "Orthopedic consultation", "amount": 140.00, "date": "2024-05-20"},
+    {"id": 11, "category": "Healthcare", "description": "Skin care treatment", "amount": 75.00, "date": "2024-05-22"},
+    {"id": 12, "category": "Healthcare", "description": "Mental health therapy", "amount": 110.00, "date": "2024-05-24"},
+    {"id": 13, "category": "Healthcare", "description": "Nutritional counseling", "amount": 85.00, "date": "2024-05-26"},
+    {"id": 14, "category": "Healthcare", "description": "Acupuncture", "amount": 95.00, "date": "2024-05-28"},
+    {"id": 15, "category": "Healthcare", "description": "Massage therapy", "amount": 70.00, "date": "2024-05-30"},
+    {"id": 16, "category": "Healthcare", "description": "Dermatology visit", "amount": 130.00, "date": "2024-06-01"},
+    {"id": 17, "category": "Healthcare", "description": "Hearing test", "amount": 110.00, "date": "2024-06-03"},
+    {"id": 18, "category": "Healthcare", "description": "Allergy testing", "amount": 160.00, "date": "2024-06-05"},
+    {"id": 19, "category": "Healthcare", "description": "Prescription glasses", "amount": 220.00, "date": "2024-06-07"},
+    {"id": 20, "category": "Healthcare", "description": "Sports medicine consultation", "amount": 150.00, "date": "2024-06-09"}
+]
