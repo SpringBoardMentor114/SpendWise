@@ -1,0 +1,41 @@
+<div class="filter-container">
+  <select [(ngModel)]="selectedCategory" (change)="filterExpenses()">
+    <option value="all">All</option>
+    <option value="food">Food</option>
+    <option value="transport">Transport</option>
+    <option value="utilities">Utilities</option>
+    <option value="entertainment">Entertainment</option>
+    <option value="healthcare">Healthcare</option>
+  </select>
+  <input type="date" [(ngModel)]="startDate" (change)="filterExpenses()">
+  <input type="date" [(ngModel)]="endDate" (change)="filterExpenses()">
+</div>
+<table>
+  <tr>
+    <th>S.No.</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th>Amount</th>
+    <th>Date of Expense</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <tr *ngFor="let expense of expenses; let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{expense.description}}</td>
+    <td>{{expense.category}}</td>
+    <td>{{expense.amount}}</td>
+    <td>{{expense.date}}</td>
+    <td><button (click)="editExpense()">Edit</button></td>
+    <td><button (click)="deleteExpense(expense.category, expense.id)">Delete</button></td>
+  </tr>
+</table>
+<div class="pagination-controls">
+  Items per page:
+  <select [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage(itemsPerPage)">
+      <option value="5">5</option>
+      <option value="10" selected>10</option>
+      <option value="15">15</option>
+  </select>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</div>
