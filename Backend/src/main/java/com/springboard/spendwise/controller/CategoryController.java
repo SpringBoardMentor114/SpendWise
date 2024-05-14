@@ -6,8 +6,6 @@ import com.springboard.spendwise.model.Category;
 import com.springboard.spendwise.service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import jakarta.validation.Valid;
 
 @CrossOrigin
 @RestController
@@ -28,13 +25,13 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping("/")
-    public Category createCategory(@Valid @RequestBody Category category) {
+    public Category createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);
     }
 
     @GetMapping("/")
-    public ResponseEntity<List<Category>> getAllCategory() {
-        return new ResponseEntity<>(categoryService.getCategories(), HttpStatus.FOUND);
+    public List<Category> getAllCategory() {
+        return categoryService.getCategories();
     }
 
     @GetMapping("/{categoryId}")
@@ -48,7 +45,7 @@ public class CategoryController {
     }
 
     @PostMapping("/{categoryId}/update")
-    public Category updateCategory(@Valid @PathVariable Long categoryId, @Valid @RequestBody Category category) {
+    public Category updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
         return categoryService.updateCategory(categoryId, category);
     }
 }

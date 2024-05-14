@@ -9,7 +9,6 @@ import com.springboard.spendwise.service.UserService;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 // import org.springframework.web.bind.annotation.*; 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,8 +36,8 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.viewUsers(), HttpStatus.FOUND);
+    public List<User> getAllUsers() {
+        return userService.viewUsers();
     }
 
     @GetMapping("/users/{id}")
