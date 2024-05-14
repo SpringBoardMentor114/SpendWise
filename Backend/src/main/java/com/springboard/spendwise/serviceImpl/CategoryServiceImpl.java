@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboard.spendwise.exception.ResourceAlreadyExistsException;
+import com.springboard.spendwise.exception.ResourceDeleteException;
 import com.springboard.spendwise.exception.ResourceNotFoundException;
 import com.springboard.spendwise.model.Category;
+import com.springboard.spendwise.model.Expense;
 import com.springboard.spendwise.repository.CategoryRepository;
+import com.springboard.spendwise.repository.ExpenseRepository;
 import com.springboard.spendwise.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 
@@ -19,7 +22,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
-
+    @Autowired
+    private ExpenseRepository expenseRepository;
 
     @Override
     public Category createCategory(Category category) {
@@ -63,11 +67,16 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long categoryId) {
-        if (!categoryRepository.existsById(categoryId)){
-            throw new ResourceNotFoundException("Sorry, category not found");
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + categoryId));
+
+        List<Expense> expenses = expenseRepository.findAllByCategory(category);
+        if (!expenses.isEmpty()) {
+            throw new ResourceDeleteException("Cannot delete category because expenses are mapped to it");
         }
 
-        categoryRepository.deleteById(categoryId);
+        categoryRepository.delete(category);
     }
+
 
 }
