@@ -37,4 +37,12 @@ public class GlobalExceptionHandler {
         error.put("error", ex.getMessage());
         return error;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(ResourceDeleteException.class)
+    public Map<String, String> handleCategoryDeleteException(ResourceDeleteException ex) {
+        Map<String, String> error = new HashMap<>();
+        error.put("error", ex.getMessage());
+        return error;
+    }
 }
