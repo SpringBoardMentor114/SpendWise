@@ -1,27 +1,26 @@
-# SpendWise
+## SpendWise
+This repository holds web-application SpendWise. It is a simple web application developed using JavaScript, HTML5 and CSS. The application helps user to keep a track of their expenditures against their income.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.1.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## How to run the code:
+You will simply need a web-browser like chrome(preferred), firefox, safari, etc.
 
-## Code scaffolding
+Clone the repository on your local machine.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Open the cloned project within IDE of your choice (brackets preferred), or any text editor sublime text or atom.
 
-## Build
+open the index.html file in your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+You should be able to a new webpage with the UI.
 
-## Running unit tests
+From the dropdown menu select + symbol (default) to add income and - symbol to specify the expenditures.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Google Chrome Version (Recommended Browser)
+The application was successfully run on google chrome v 67.0.3396.87
 
-## Running end-to-end tests
+## Brackets Version
+The code was developed on Brackets IDE Edition V1.13.0.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## JavaScript Version
+ECMAScript 5.
