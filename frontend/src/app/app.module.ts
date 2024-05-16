@@ -22,6 +22,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 
 registerLocaleData(en);
 
@@ -48,6 +49,7 @@ const routes: Routes = [
     HomeComponent,
     EditingComponent,
     AddComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

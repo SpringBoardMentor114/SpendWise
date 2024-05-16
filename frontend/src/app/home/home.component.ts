@@ -27,11 +27,6 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) {}
 
 
-  isSidebarOpen: boolean = false;
-
-  toggleSidebar(): void {
-    this.isSidebarOpen = !this.isSidebarOpen;
-  }
 
   public barChart: any;
   public pieChart: any;

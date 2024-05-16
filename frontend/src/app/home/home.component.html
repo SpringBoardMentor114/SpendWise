@@ -1,35 +1,3 @@
-<div class="navbar">
-  <div class="navbar-left">
-    <!-- Navbar brand/logo -->
-    <a href="#" class="navbar-brand">SpendWise</a>
-  </div>
-  <div class="navbar-right">
-
-
-    <div class="user-info">
-
-      <span>Welcome, {{ firstName }}</span>
-    </div>
-  </div>
-  <div class="user-info">
-    <button class="btn btn-primary pr" (click)="toggleSidebar()">Profile</button>
-  </div>
-</div>
-
-<div class="sidebar" [ngClass]="{ 'active': isSidebarOpen }">
-  <ul class="sidebar-menu">
-    <hr>
-    <br>
-    <li> First Name: {{ firstName }}</li>
-    <li>Last Name: {{ lastName }}</li>
-    <br>
-    <hr>
-    <li><a routerLink="/PassReset">Change Password</a></li>
-    <hr>
-    <li><a routerLink="/logout">Logout</a></li>
-    <hr>
-  </ul>
-</div>
 
   
 
@@ -41,7 +9,7 @@
     <button (click)="addNewExpense()" class="btn btn-outline-primary" style="margin-right: 14px;">Add New
       Expense</button>
     <button (click)="viewAllExpenses()" class="btn btn-secondary" style="margin-right: 14px;">View All Expenses</button>
-    <button (click)="editExpense()" class="btn btn-secondary">Edit Expenses</button>
+    
   </div>
   <h3>Last 30 Days Expense Graph</h3>
   <div class="bar-graph-container">
