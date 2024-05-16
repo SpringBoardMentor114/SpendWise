@@ -13,9 +13,8 @@ import { ExpenseListComponent } from './expenses/expense-list/expense-list.compo
 import { EditingComponent } from './expenses/editing/editing.component';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
 import { ReactiveFormsModule } from '@angular/forms';
-// import { HomeComponent } from './home/home.component'; 
+import { HomeComponent } from './home/home.component'; 
 import { AddComponent } from './expenses/add/add.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -23,6 +22,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HeaderComponent } from './header/header.component';
 
 registerLocaleData(en);
 
@@ -32,7 +32,7 @@ const routes: Routes = [
   {path:'PassReset',component:PassresetComponent},
   {path:'Login',component:LoginComponent},
  
-  // {path:'Home',component:HomeComponent}
+  {path:'Home',component:HomeComponent}
 
 ];
 
@@ -46,8 +46,10 @@ const routes: Routes = [
     CMIComponent,
     LoggingComponent,
     ExpenseListComponent,
+    HomeComponent,
     EditingComponent,
     AddComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,13 +58,17 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgxChartsModule,
-    FormsModule,
     HttpClientModule
+
+ 
+
   ],
+
+ 
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
   ],
   bootstrap: [AppComponent,]
 })
