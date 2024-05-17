@@ -1,0 +1,64 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+ 
+  .category-form {
+    margin-bottom: 20px;
+  }
+ 
+  .category-form input {
+    padding: 8px;
+    font-size: 16px;
+  }
+ 
+  .btn-add {
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+ 
+  .btn-add:hover {
+    background-color: #45a049;
+  }
+ 
+  .category-list table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+ 
+  .category-list th, .category-list td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+ 
+  .category-list th {
+    background-color: #f2f2f2;
+  }
+ 
+  .btn-update, .btn-delete {
+    padding: 8px 12px;
+    margin-right: 6px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+ 
+  .btn-delete {
+    background-color: #f44336;
+  }
+ 
+  .btn-update:hover, .btn-delete:hover {
+    background-color: #005A70;
+  }
