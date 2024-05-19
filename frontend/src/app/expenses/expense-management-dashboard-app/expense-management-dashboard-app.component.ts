@@ -2,9 +2,9 @@ import { Component, OnInit,ViewChild  } from '@angular/core';
 import { ExpensesService } from './expenses.services';
 import { HttpClient } from '@angular/common/http';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
+
 import { Router } from '@angular/router';
-import { ExpenseItem } from '../../models/expense-item.model';
+
 @Component({
   selector: 'app-expense-management-dashboard-app',
   templateUrl: './expense-management-dashboard-app.component.html',
@@ -66,7 +66,7 @@ export class ExpenseManagementDashboardAppComponent implements OnInit {
     }
   }
   editExpense() {
-    this.router.navigate(['EDIT']);
+    this.router.navigate(['spendwise/expense/edit']);
   }
 
   paginateExpenses() {

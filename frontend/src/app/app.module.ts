@@ -15,15 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSortModule } from '@angular/material/sort';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+
+
 import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
+
 import { ReactiveFormsModule } from '@angular/forms';
 // import { HomeComponent } from './home/home.component'; 
 import { AddComponent } from './expenses/add/add.component';
@@ -69,25 +64,17 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgxChartsModule,
-    FormsModule,
+
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule,
-    BrowserAnimationsModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTableModule,
-    MatNativeDateModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
+    
     HttpClientModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
+    provideAnimationsAsync('noop')
   ],
   bootstrap: [AppComponent,]
 })
