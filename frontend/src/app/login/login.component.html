@@ -2,13 +2,14 @@
     <form (ngSubmit)="onSubmit()">
       <div class="container">
           <h1>Login Form</h1>
-          <p> Welcome Back ! Please Login with Your Creditials </p>
-  
+          
           <form action="">
-              <input type="email" id="email" name = "email" placeholder="Email">
-              <input type="password" id="password" name="password" placeholder="Password">
+            <div class="em">Email</div>
+              <input type="email" id="email" name = "email" placeholder="email">
+            <div class="pass">Password</div>
+              <input type="password" id="password" name="password" placeholder="password">
               <div class="forgetpass">
-                  <a href="PassReset">Forget Password</a>
+                  <a href="PassReset">Forget Password?</a>
               </div>
               
               <!-- <button type="submit"> Login </button> -->
@@ -16,7 +17,7 @@
           </form>
           
           <div class="signup"> 
-              Don't Have an Account ? <a href="Registration"> Signup</a>
+              Don't Have an Account? <a class="sp" href="Registration">Signup</a>
           </div>
       </div>
  
