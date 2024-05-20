@@ -88,22 +88,22 @@ public class UserServiceImpl implements UserService{
    // Kunal work
 
 // login
-    @Override
-    public LoginResponse loginUser(LoginDTO loginDTO) {
-        User user = userRepository.findByEmail(loginDTO.getEmail());
-        if (user != null) {
-            String password = loginDTO.getPassword();
-            String storedPassword = user.getPassword(); 
-            if (password.equals(storedPassword)) {
-                return new LoginResponse("Login Success", true);
-            } else if(!password.equals(storedPassword) ) {
-                return new LoginResponse("Password Incorrect", false);
-            }else {
-                return new LoginResponse("Login Failed", false);
-            }
-        } else {
-            return new LoginResponse("Email does not exist", false);
-        }
-    }
+@Override
+public LoginResponse loginUser (LoginDTO loginDTO) {
+    final String enteredPassword = loginDTO.getPassword();
+    User user = userRepository.findByEmail (loginDTO.getEmail());
+    if (user != null) {
 
+        String storedPassword = user.getPassword();
+        if (passwordEncoder.matches (enteredPassword, storedPassword)) {
+            return new LoginResponse ( "Login Success",  true);
+        } else if(!passwordEncoder.matches (enteredPassword, storedPassword)) {
+            return new LoginResponse ( "Password Incorrect", false);
+        }else {
+            return new LoginResponse ( "Login Failed",  false);
+        }
+    }else {
+        return new LoginResponse ( "Email does not exist", false);
+    }
+    }
 }
