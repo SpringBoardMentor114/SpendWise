@@ -1,87 +1,79 @@
-import { Component, OnInit,ViewChild  } from '@angular/core';
-import { ExpensesService } from './expenses.services';
-import { HttpClient } from '@angular/common/http';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 
-import { Router } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import{ Routes,RouterModule} from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { PassresetComponent } from './passreset/passreset.component';
+import { CMIComponent } from './cmi/cmi.component';
+import { LoggingComponent } from './expenses/logging/logging.component';
+import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
+import { EditingComponent } from './expenses/editing/editing.component';
+import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
+import { ReactiveFormsModule } from '@angular/forms';
+ import { HomeComponent } from './home/home.component'; 
+import { AddComponent } from './expenses/add/add.component';
+import { NZ_I18N } from 'ng-zorro-antd/i18n';
+import { en_US } from 'ng-zorro-antd/i18n';
+import { registerLocaleData } from '@angular/common';
+import en from '@angular/common/locales/en';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 
-@Component({
-  selector: 'app-expense-management-dashboard-app',
-  templateUrl: './expense-management-dashboard-app.component.html',
-  styleUrls: ['./expense-management-dashboard-app.component.css']
+registerLocaleData(en);
+
+const routes: Routes = [
+  {path:'', redirectTo:'Login',pathMatch:'full'} ,
+  {path:'Registration',component:RegistrationComponent},
+  {path:'PassReset',component:PassresetComponent},
+  {path:'Login',component:LoginComponent},
+  {path:'category-management', component:CategoryManagementFormComponent},
+  {path:'EDIT',component:EditingComponent}
+
+  {path:'Home',component:HomeComponent}
+
+];
+
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    RegistrationComponent,
+    PassresetComponent,
+    CMIComponent,
+    LoggingComponent,
+    ExpenseListComponent,
+    EditingComponent,
+    AddComponent,
+   ExpenseManagementDashboardAppComponent,
+   CategoryManagementFormComponent,
+   HeaderComponent,
+
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    RouterModule.forRoot(routes),
+    NgxChartsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    HttpClientModule
+  ],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    provideAnimationsAsync(),
+    provideHttpClient(),
+    provideAnimationsAsync('noop')
+  ],
+  bootstrap: [AppComponent,]
 })
-export class ExpenseManagementDashboardAppComponent implements OnInit {
-  expenses: any[] = [];
-  paginatedExpenses: any[] = [];
-  pageSizeOptions: number[] = [5, 10, 15];
-  itemsPerPage = 10;
-  currentPage = 1;
-  selectedCategory = 'all';
-  startDate!: string;
-  endDate!: string;
-
-  
-  
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  constructor(private expensesService: ExpensesService,private router: Router) {
-    
-  }
-
-  ngOnInit(): void {
-    this.loadAllExpenses();
-  }
-
-  loadAllExpenses() {
-    ['food', 'transport', 'utilities', 'entertainment', 'healthcare'].forEach(category => {
-      this.expensesService.getExpenses(category).subscribe(data => {
-        this.expenses = [...this.expenses, ...data];
-        this.expenses.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-      });
-    });
-  }
-
-  filterExpenses() {
-    if (this.selectedCategory !== 'all') {
-      this.expensesService.getExpenses(this.selectedCategory).subscribe(data => {
-        this.expenses = data.filter(item => new Date(item.date) >= new Date(this.startDate) && new Date(item.date) <= new Date(this.endDate));
-      });
-    } else {
-      this.loadAllExpenses();
-    }
-  }
-  
-
-  deleteExpense(category: string, id: number) {
-    if (confirm("Are you sure you want to delete this expense?")) {
-      this.expensesService.deleteExpense(category, id).subscribe({
-        next: (response) => {
-          console.log('Expense deleted successfully');
-          this.loadAllExpenses();  // Reload the list after deletion
-        },
-        error: (error) => {
-          console.error('Error deleting expense', error);
-        }
-      });
-    }
-  }
-  editExpense() {
-    this.router.navigate(['spendwise/expense/edit']);
-  }
-
-  paginateExpenses() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    this.paginatedExpenses = this.expenses.slice(startIndex, startIndex + this.itemsPerPage);
-  }
-
-  changePage(page: number) {
-    this.currentPage = page;
-    this.paginateExpenses();
-  }
-
-  changeItemsPerPage(num: number) {
-    this.itemsPerPage = num;
-    this.paginateExpenses();
-  }
-}
-  
+export class AppModule { }
