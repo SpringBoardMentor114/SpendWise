@@ -15,12 +15,9 @@ import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
-
 import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
-
 import { ReactiveFormsModule } from '@angular/forms';
-// import { HomeComponent } from './home/home.component'; 
+import { HomeComponent } from './home/home.component'; 
 import { AddComponent } from './expenses/add/add.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
@@ -36,10 +33,10 @@ const routes: Routes = [
   {path:'Registration',component:RegistrationComponent},
   {path:'PassReset',component:PassresetComponent},
   {path:'Login',component:LoginComponent},
-  {path:'**',component:LoginComponent},
+  {path:'category-management', component:CategoryManagementFormComponent},
   {path:'EDIT',component:EditingComponent}
-
-  // {path:'Home',component:HomeComponent}
+  
+  {path:'Home',component:HomeComponent}
 
 ];
 
@@ -56,6 +53,9 @@ const routes: Routes = [
     EditingComponent,
     AddComponent,
    ExpenseManagementDashboardAppComponent,
+   CategoryManagementFormComponent,
+   HeaderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -64,10 +64,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgxChartsModule,
-
     MatTableModule,
     MatPaginatorModule,
-    
     HttpClientModule
   ],
   providers: [
