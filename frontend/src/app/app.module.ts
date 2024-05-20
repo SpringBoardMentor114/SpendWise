@@ -22,7 +22,11 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HttpClientModule, provideHttpClient } from '@angular/common/http';
+<<<<<<< HEAD
+import { CategoryManagementFormComponent } from './category-management-form/category-management-form.component';
+=======
 import { HeaderComponent } from './header/header.component';
+>>>>>>> 2915befd826da3afaf1bb6233bec4ad2f23a12df
 
 registerLocaleData(en);
 
@@ -31,6 +35,7 @@ const routes: Routes = [
   {path:'Registration',component:RegistrationComponent},
   {path:'PassReset',component:PassresetComponent},
   {path:'Login',component:LoginComponent},
+  {path:'category-management', component:CategoryManagementFormComponent},
  
   {path:'Home',component:HomeComponent}
 
@@ -49,7 +54,11 @@ const routes: Routes = [
     HomeComponent,
     EditingComponent,
     AddComponent,
+<<<<<<< HEAD
+    CategoryManagementFormComponent,
+=======
     HeaderComponent,
+>>>>>>> 2915befd826da3afaf1bb6233bec4ad2f23a12df
   ],
   imports: [
     BrowserModule,
