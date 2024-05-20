@@ -11,6 +11,7 @@ const routes: Routes = [
     { path:'spendwise/login', component: LoginComponent},
     {path:'spendwise/expense/edit',component:EditingComponent},
     {path:'spendwise/expense/add',component:AddComponent},
+    {path:'spendwise/expense/list',component:ExpenseListComponent},
 
 ];
 

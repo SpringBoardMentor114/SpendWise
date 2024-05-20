@@ -6,13 +6,10 @@ import com.springboard.spendwise.model.User;
 import com.springboard.spendwise.response.LoginResponse;
 import com.springboard.spendwise.service.UserService;
 
-import jakarta.validation.Valid;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 // import org.springframework.web.bind.annotation.*; 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin
 @RequestMapping("/spendwise/register")
-@Validated
 public class UserController {
 
 // kunal work for registration
@@ -35,13 +31,13 @@ public class UserController {
 
 
     @PostMapping("/users")
-    public User createUser(@Valid @RequestBody User user) {
+    public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return new ResponseEntity<>(userService.viewUsers(), HttpStatus.FOUND);
+    public List<User> getAllUsers() {
+        return userService.viewUsers();
     }
 
     @GetMapping("/users/{id}")
@@ -55,7 +51,7 @@ public class UserController {
     }
 
     @PostMapping("/users/{id}/update")
-    public User updateUser(@Valid @PathVariable Long id, @Valid @RequestBody User user) {
+    public User updateUser(@PathVariable Long id, @RequestBody User user) {
         return userService.updateUser(id, user);
     }
 
