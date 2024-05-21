@@ -1,0 +1,22 @@
+[
+    {"id": 1, "category": "Entertainment", "description": "Movie tickets", "amount": 25.00, "date": "2024-05-02"},
+    {"id": 2, "category": "Entertainment", "description": "Concert tickets", "amount": 120.00, "date": "2024-05-04"},
+    {"id": 3, "category": "Entertainment", "description": "Theater show", "amount": 90.00, "date": "2024-05-06"},
+    {"id": 4, "category": "Entertainment", "description": "Amusement park", "amount": 150.00, "date": "2024-05-08"},
+    {"id": 5, "category": "Entertainment", "description": "Video game purchase", "amount": 60.00, "date": "2024-05-10"},
+    {"id": 6, "category": "Entertainment", "description": "Museum entry", "amount": 40.00, "date": "2024-05-12"},
+    {"id": 7, "category": "Entertainment", "description": "Book purchase", "amount": 30.00, "date": "2024-05-14"},
+    {"id": 8, "category": "Entertainment", "description": "Sports event", "amount": 75.00, "date": "2024-05-16"},
+    {"id": 9, "category": "Entertainment", "description": "Music streaming subscription", "amount": 10.00, "date": "2024-05-18"},
+    {"id": 10, "category": "Entertainment", "description": "Art supplies", "amount": 50.00, "date": "2024-05-20"},
+    {"id": 11, "category": "Entertainment", "description": "Zoo visit", "amount": 35.00, "date": "2024-05-22"},
+    {"id": 12, "category": "Entertainment", "description": "Aquarium visit", "amount": 25.00, "date": "2024-05-24"},
+    {"id": 13, "category": "Entertainment", "description": "Golf course fees", "amount": 100.00, "date": "2024-05-26"},
+    {"id": 14, "category": "Entertainment", "description": "Bowling alley", "amount": 45.00, "date": "2024-05-28"},
+    {"id": 15, "category": "Entertainment", "description": "Karaoke night", "amount": 30.00, "date": "2024-05-30"},
+    {"id": 16, "category": "Entertainment", "description": "Escape room experience", "amount": 25.00, "date": "2024-06-01"},
+    {"id": 17, "category": "Entertainment", "description": "City tour", "amount": 50.00, "date": "2024-06-03"},
+    {"id": 18, "category": "Entertainment", "description": "Wine tasting event", "amount": 70.00, "date": "2024-06-05"},
+    {"id": 19, "category": "Entertainment", "description": "Craft workshop", "amount": 40.00, "date": "2024-06-07"},
+    {"id": 20, "category": "Entertainment", "description": "Comedy club", "amount": 20.00, "date": "2024-06-09"}
+]

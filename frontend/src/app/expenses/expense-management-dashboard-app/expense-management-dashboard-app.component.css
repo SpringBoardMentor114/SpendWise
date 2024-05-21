@@ -1,0 +1,106 @@
+/* Global styles for the component */
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Filter container styling */
+.filter-container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px; /* Adds some space below the filter section */
+}
+
+.filter-container select, .filter-container input {
+    margin-right: 10px; /* Spacing between elements */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Responsive design for the filter container */
+@media (max-width: 600px) {
+    .filter-container {
+        flex-direction: column; /* Stack vertically on smaller screens */
+        align-items: start;
+    }
+
+    .filter-container select, .filter-container input {
+        margin-right: 0;
+        margin-bottom: 10px; /* Space between elements when stacked */
+        width: 100%; /* Full width for easier touch input on mobile devices */
+    }
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* Button styling within table */
+button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Additional responsiveness for the table */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    th, td {
+        text-align: right;
+    }
+
+    td {
+        text-align: left;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        position: absolute;
+        left: 10px;
+        width: 45%; /* Adjust based on your preference */
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-label); /* Using attribute from the data-label in td */
+    }
+}
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.pagination-controls select, .pagination-controls button {
+    margin: 0 5px;
+    padding: 5px 10px;
+}
