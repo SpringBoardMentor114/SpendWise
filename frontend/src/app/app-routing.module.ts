@@ -9,7 +9,7 @@ import { AddComponent } from './expenses/add/add.component';
 const routes: Routes = [
     {path:'spendwise/register/users', component: RegistrationComponent},
     { path:'spendwise/login', component: LoginComponent},
-    {path:'spendwise/expense/edit',component:EditingComponent},
+    {path:'spendwise/expense/edit/:id',component:EditingComponent},
     {path:'spendwise/expense/add',component:AddComponent},
     {path:'spendwise/expense/list',component:ExpenseListComponent},
 

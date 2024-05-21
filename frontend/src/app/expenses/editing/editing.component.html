@@ -9,20 +9,18 @@
           Description must be at least 3 characters long.
         </span>
       </div>
+
       <div class="mb-4">
         <label for="category" class="font-bold mb-1 block">Category:</label>
-        <select id="category" name="category" required class="w-full px-3 py-2 border rounded-md" [(ngModel)]="formData.category" #categoryInput="ngModel">
-          <option value="" disabled>Select Category</option>
-          <option value="Food">1</option>
-          <option value="Transportation">2</option>
-          <option value="Utilities">3</option>
-          <option value="Entertainment">4</option>
-          <option value="Miscellaneous">5</option>
+        <select id="category" name="category" required class="w-full px-3 py-2 border rounded-md" [(ngModel)]="formData.category.categoryId" #categoryInput="ngModel">
+          <option [ngValue]="null" disabled>Select Category</option>
+          <option *ngFor="let category of categories" [ngValue]="category.categoryId">{{ category.categoryName }}</option>
         </select>
         <span class="text-red-500 text-sm" *ngIf="(categoryInput.touched || myForm.submitted) && categoryInput.invalid">
           Please select a category.
         </span>
       </div>
+
       <div class="mb-4">
         <label for="date" class="font-bold mb-1 block">Date:</label>
         <input type="date" id="date" name="date" required class="w-full px-3 py-2 border rounded-md" [(ngModel)]="formData.date" #dateInput="ngModel">
@@ -30,6 +28,7 @@
           Please select a date.
         </span>
       </div>
+
       <div class="mb-4">
         <label for="amount" class="font-bold mb-1 block">Amount:</label>
         <input type="number" id="amount" name="amount" step="0.01" min="0.01" required class="w-full px-3 py-2 border rounded-md" [(ngModel)]="formData.amount" #amountInput="ngModel">
@@ -37,6 +36,7 @@
           Please enter a valid amount greater than 0.
         </span>
       </div>
+
       <button type="submit" id="saveBtn" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Save</button>
     </form>
   </div>
