@@ -40,14 +40,15 @@ export class AddComponent implements OnInit {
   
       const expense: Expense = {
         description: this.formData.description,
-        category: this.formData.category ?? { categoryId: 0 }, 
+        category: this.formData.category ?? { categoryId: 0, categoryName : "" },
         date: this.formData.date,
         amount: this.formData.amount ?? 0,
       };
   
       this.dataService.addExpense(expense).subscribe(
         () => {
-          this.notification.success('Success', 'Expense added successfully');
+          this.notification.success('Success', 'Expense added successfully',  { nzDuration: 5000 });
+          this.router.navigateByUrl('/spendwise/expense-dashboard');
         },
         (error: HttpErrorResponse) => {
           this.notification.error('Error', 'Failed to add expense');

@@ -64,32 +64,31 @@ export class EditingComponent implements OnInit {
   
   saveData() {
     if (this.validateForm()) {
-      const savedData = JSON.parse(JSON.stringify(this.formData));
-      console.log('Form data is valid. Saving data:', savedData);
-  
-      this.dataService.updateExpense(this.expenseId, savedData).subscribe(
-        (response: any) => {
-          console.log('Update response:', response);
-          if (response.status) {
-            this.notification.success('Success', 'Expense updated successfully');
-          } else {
-            this.notification.error('Error', response.error || 'An error occurred while updating the expense');
-          }
+      const expense: Expense = {
+        description: this.formData.description,
+        category: {
+          categoryId: this.formData.category.categoryId,
+          categoryName: null,
+        },
+        date: this.formData.date,
+        amount: this.formData.amount,
+      };
+ 
+      this.dataService.updateExpense(this.expenseId, expense).subscribe(
+        (response: Expense) => {
+          this.notification.success('Success', 'Expense updated successfully', { nzDuration: 5000 });
+          this.router.navigateByUrl('/spendwise/expense-dashboard');
         },
         (error: HttpErrorResponse) => {
-          console.error('Error occurred:', error);
-          if (error.status === 0) {
-            this.notification.error('Network Error', 'Unable to connect to the server. Please check your network connection.');
-          } else {
-            this.notification.error('Server Error', `An error occurred on the server: ${error.message}`);
-          }
+          this.notification.error('Error', 'Failed to update expense');
+          console.error('Error updating expense:', error);
         }
       );
     } else {
       this.notification.error('Error', 'Please fill all the fields correctly');
     }
   }
-  
+ 
   
 
   validateForm(): boolean {
