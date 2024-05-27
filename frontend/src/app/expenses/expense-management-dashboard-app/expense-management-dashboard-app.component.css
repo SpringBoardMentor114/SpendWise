@@ -1,5 +1,4 @@
 /* Global styles for the component */
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
 :host {
     display: flex;
     flex-direction: column;
