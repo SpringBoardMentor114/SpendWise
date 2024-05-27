@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Category, DataService, Expense } from '../data.service';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -33,7 +32,6 @@ export class ExpenseManagementDashboardAppComponent implements OnInit {
     amount: null,
   };
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private dataService: DataService, private router: Router, private http: HttpClient,     private route: ActivatedRoute // Add ActivatedRoute to your imports
 ) {}

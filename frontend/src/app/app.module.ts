@@ -16,10 +16,6 @@ import { LoggingComponent } from './expenses/logging/logging.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { EditingComponent } from './expenses/editing/editing.component';
 import { HomeComponent } from './home/home.component';
-
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-
 import { AddComponent } from './expenses/add/add.component';
 import { HeaderComponent } from './header/header.component';
 import { CategoryManagementFormComponent } from './category-management-form/category-management-form.component';
@@ -75,10 +71,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
     NgxChartsModule,
-
-    MatTableModule,
-    MatPaginatorModule,
-
     HttpClientModule
   ],
   providers: [
