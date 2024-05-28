@@ -230,6 +230,7 @@ input:focus::placeholder {
   visibility: hidden;
 }
 
+
 input::placeholder {
   padding-left:15px;
 }
@@ -322,4 +323,3 @@ input::placeholder {
 .invalid {
   border: 1px solid red !important;
 }
-

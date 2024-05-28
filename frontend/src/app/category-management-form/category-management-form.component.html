@@ -1,0 +1,36 @@
+
+<div class="container">
+    <h2>Category Management</h2>
+    <div class="category-form">
+      <input type="text" [(ngModel)]="newCategoryName" placeholder="Enter category name">
+      <button class="btn-add" (click)="addCategory()">Add Category</button>
+    </div>
+    <div class="category-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Serial No.</th>
+            <th>Category Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let category of categories; let i = index">
+           <!-- <td>{{ category.categoryId}}</td> -->
+           <td>{{ i+ 1}}</td>
+
+            <td>
+              <span *ngIf="!category.editing">{{ category.categoryName }}</span>
+              <input *ngIf="category.editing" type="text" [(ngModel)]="category.newName" placeholder="Enter new name">
+            </td>
+            <td>
+              <button class="btn-update" (click)="toggleEdit(category)">Update</button>
+              <button class="btn-delete" (click)="confirmDelete(category.categoryId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ 
+
