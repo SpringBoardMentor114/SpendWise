@@ -1,79 +1,125 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Category, DataService, Expense } from '../data.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import{ Routes,RouterModule} from '@angular/router';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegistrationComponent } from './registration/registration.component';
-import { PassresetComponent } from './passreset/passreset.component';
-import { CMIComponent } from './cmi/cmi.component';
-import { LoggingComponent } from './expenses/logging/logging.component';
-import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
-import { EditingComponent } from './expenses/editing/editing.component';
-import { FormsModule } from '@angular/forms';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
-import { ReactiveFormsModule } from '@angular/forms';
- import { HomeComponent } from './home/home.component'; 
-import { AddComponent } from './expenses/add/add.component';
-import { NZ_I18N } from 'ng-zorro-antd/i18n';
-import { en_US } from 'ng-zorro-antd/i18n';
-import { registerLocaleData } from '@angular/common';
-import en from '@angular/common/locales/en';
-import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http';
-
-registerLocaleData(en);
-
-const routes: Routes = [
-  {path:'', redirectTo:'Login',pathMatch:'full'} ,
-  {path:'Registration',component:RegistrationComponent},
-  {path:'PassReset',component:PassresetComponent},
-  {path:'Login',component:LoginComponent},
-  {path:'category-management', component:CategoryManagementFormComponent},
-  {path:'EDIT',component:EditingComponent}
-
-  {path:'Home',component:HomeComponent}
-
-];
+interface FormData {
+  description: string;
+  category: Category | null;
+  date: string;
+  amount: number | null;
+}
 
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    RegistrationComponent,
-    PassresetComponent,
-    CMIComponent,
-    LoggingComponent,
-    ExpenseListComponent,
-    EditingComponent,
-    AddComponent,
-   ExpenseManagementDashboardAppComponent,
-   CategoryManagementFormComponent,
-   HeaderComponent,
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(routes),
-    NgxChartsModule,
-    MatTableModule,
-    MatPaginatorModule,
-    HttpClientModule
-  ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US },
-    provideAnimationsAsync(),
-    provideHttpClient(),
-    provideAnimationsAsync('noop')
-  ],
-  bootstrap: [AppComponent,]
+@Component({
+  selector: 'app-expense-management-dashboard-app',
+  templateUrl: './expense-management-dashboard-app.component.html',
+  styleUrls: ['./expense-management-dashboard-app.component.css']
 })
-export class AppModule { }
+export class ExpenseManagementDashboardAppComponent implements OnInit {
+  expenses: Expense[] = [];
+  // pageSizeOptions: number[] = [5, 10, 15];
+  // itemsPerPage = 10;
+  // currentPage = 1;
+  // selectedCategory = 'all';
+  // startDate?: string;
+  // endDate?: string;
+  categories: Category[] = [];
+  formData: FormData = {
+    description: '',
+    category: null, 
+    date: '',
+    amount: null,
+  };
+
+
+  constructor(private dataService: DataService, private router: Router, private http: HttpClient,     private route: ActivatedRoute // Add ActivatedRoute to your imports
+) {}
+
+  ngOnInit(): void {
+    this.loadAllExpenses();
+    this.loadCategories();
+  }
+
+  loadAllExpenses(): void {
+    this.dataService.getExpenses().subscribe(data => {
+      console.log(data);
+      this.expenses = data;
+
+      this.expenses.forEach(expense => {
+        let expenseId = expense.expenseId;
+        console.log('Expense ID:', expenseId);
+        
+      }); 
+
+    });
+  }
+
+  loadCategories(): void {
+    this.dataService.getCategories().subscribe(data => {
+      this.categories = data;
+    });
+  }
+
+  // applyFilters(): void {
+  //   let filteredExpenses = this.expenses;
+
+  //   if (this.selectedCategory !== 'all') {
+  //     filteredExpenses = filteredExpenses.filter(expense => expense.category.categoryId.toString() === this.selectedCategory);
+  //   }
+
+
+  //   this.expenses = filteredExpenses;
+  //   this.paginateExpenses();
+  // }
+
+  deleteExpense(expenseId: number): void {
+    if (confirm('Are you sure you want to delete this expense?')) {
+      this.dataService.deleteExpense(expenseId).subscribe({
+        next: () => {
+          console.log('Expense deleted successfully');
+          this.loadAllExpenses();
+        },
+        error: (error: any) => {
+          console.error('Error deleting expense', error);
+        }
+      });
+    }
+  }
+
+  editExpense(expenseId: number): void {
+    this.dataService.getExpenses().subscribe(
+      (expenses) => {
+        const selectedExpense = expenses.find(expense => expense.expenseId === expenseId);
+        if (selectedExpense) {
+          this.router.navigate(['spendwise/expense/edit', expenseId], { state: { expense: selectedExpense } });
+        } else {
+          console.error('Expense not found');
+        }
+      },
+      (error: any) => {
+        console.error('Error fetching expenses:', error);
+      }
+    );
+  }
+
+  // paginateExpenses(): void {
+  //   const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+  //   this.paginatedExpenses = this.expenses.slice(startIndex, startIndex + this.itemsPerPage);
+  // }
+
+  // changePage(pageEvent: PageEvent): void {
+  //   this.currentPage = pageEvent.pageIndex + 1;
+  //   this.itemsPerPage = pageEvent.pageSize;
+  //   this.paginateExpenses();
+  // }
+
+  // changeItemsPerPage(num: number): void {
+  //   this.itemsPerPage = num;
+  //   this.paginateExpenses();
+  // }
+
+  // filterExpenses(): void {
+  //   this.applyFilters();
+  // }
+}

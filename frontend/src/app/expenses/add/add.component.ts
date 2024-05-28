@@ -1,82 +1,82 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { DataService } from '../data.service';
- 
+import { DataService, Category, Expense } from '../data.service';
+
 interface FormData {
   description: string;
-  category: string;
+  category: Category | null;
   date: string;
-  amount: number;
+  amount: number | null;
 }
- 
+
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
 })
-export class AddComponent {
- 
+export class AddComponent implements OnInit {
   formData: FormData = {
     description: '',
-    category: '',
+    category: null, 
     date: '',
-    amount: 0
+    amount: null,
   };
- 
-  constructor(private notification: NzNotificationService, private router: Router, private http: HttpClient,   private dataService: DataService) {}
- 
+
+  categories: Category[] = [];
+
+  constructor(private notification: NzNotificationService, private router: Router, private http: HttpClient, private dataService: DataService) { }
+
+  ngOnInit(): void {
+    this.dataService.getCategories().subscribe(data => {
+      this.categories = data;
+    });
+  }
+
   saveData() {
     if (this.validateForm()) {
-      const savedData = JSON.parse(JSON.stringify(this.formData)); 
-      console.log('Form data is valid. Saving data:', savedData);
-
-      this.dataService.addExpense(savedData).subscribe(
-        (response: any) => {
-          if (response.success) {
-            this.router.navigateByUrl('/spendwise/expense/list');
-            this.notification.success('Success', 'Expense added successfully');
-          } else {
-            this.notification.error('Error', response.error || 'An error occurred while adding the expense');
-          }
+      
+      console.log('Form data is valid. Saving data:', this.formData);
+  
+      const expense: Expense = {
+        description: this.formData.description,
+        category: this.formData.category ?? { categoryId: 0, categoryName : "" },
+        date: this.formData.date,
+        amount: this.formData.amount ?? 0,
+      };
+  
+      this.dataService.addExpense(expense).subscribe(
+        () => {
+          this.notification.success('Success', 'Expense added successfully',  { nzDuration: 5000 });
+          this.router.navigateByUrl('/spendwise/expense-dashboard');
         },
         (error: HttpErrorResponse) => {
-          console.error('Error occurred:', error);
-          if (error.status === 0) {
-            this.notification.error('Network Error', 'Unable to connect to the server. Please check your network connection.');
-          } else {
-            this.notification.error('Server Error', `An error occurred on the server: ${error.message}`);
-          }
+          this.notification.error('Error', 'Failed to add expense');
+          console.error('Error adding expense:', error);
         }
       );
-    }
-    else {
+    } else {
       this.notification.error('Error', 'Please fill all the fields correctly');
     }
   }
- 
+  
   validateForm(): boolean {
     let isValid = true;
- 
     if (this.formData.description.trim().length < 3) {
       isValid = false;
     }
- 
-    // Validate category
-    if (this.formData.category === '') {
+    if (!this.formData.category || !this.formData.category.categoryId) {
+      isValid = false;
+      console.log('Please select category');
+    }
+    if (!this.formData.date) {
       isValid = false;
     }
- 
-    // Validate date
-    if (!this.formData.date) { // Assuming date should not be empty
+    
+    const amount: number = this.formData.amount ?? 0;
+    if (isNaN(amount) || amount <= 0) {
       isValid = false;
     }
- 
-    // Validate amount
-    if (isNaN(this.formData.amount) || this.formData.amount <= 0) {
-      isValid = false;
-    }
- 
     return isValid;
   }
 }
