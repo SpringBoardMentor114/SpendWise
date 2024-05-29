@@ -14,9 +14,9 @@ import { EditingComponent } from './expenses/editing/editing.component';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { MatTableModule } from '@angular/material/table';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
+// import { MatTableModule } from '@angular/material/table';
+// import { MatPaginatorModule } from '@angular/material/paginator';
+// import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './home/home.component'; 
@@ -65,7 +65,7 @@ const routes: Routes = [
     EditingComponent,
     AddComponent,
 
-   ExpenseManagementDashboardAppComponent,
+  //  ExpenseManagementDashboardAppComponent,
    CategoryManagementFormComponent,
    HeaderComponent,
 
@@ -84,8 +84,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgxChartsModule,
 
-    MatTableModule,
-    MatPaginatorModule,
+    // MatTableModule,
+    // MatPaginatorModule,
 
     HttpClientModule
 
