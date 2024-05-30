@@ -50,10 +50,28 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @PostMapping("/users/{id}/update")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id, user);
+  @GetMapping("/users/findIdByEmail/{email}")
+    public ResponseEntity<Long> getUserIdByEmail(@PathVariable String email) {
+        User user = userService.getUserByEmail(email);
+        if (user != null) {
+            return ResponseEntity.ok(user.getId());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+    @PostMapping("/users/{id}/update")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user) {
+        User updatedUser = userService.updateUser(id, user);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @PostMapping("/users/updatePassword")
+    public ResponseEntity<User> updatePassword(@RequestBody User user) {
+        User updatedUser = userService.updateUserPassword(user); // Call updatePassword with newPassword
+        return ResponseEntity.ok(updatedUser); // Return the updated user object
+    }
+
 
 // login (use api http://localhost:8085/register/users/login) or using use (/user/login) by changing the @RequestMapping path
     @PostMapping(path = "/login")
