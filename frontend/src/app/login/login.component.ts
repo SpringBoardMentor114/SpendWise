@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthserviceService } from './auth.service';
 import { Subscription } from 'rxjs';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,22 +15,34 @@ export class LoginComponent{
   errorMessage: string = '';
   subscription: Subscription | undefined;
 
-  constructor(private authService: AuthserviceService, private router: Router) {}
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
+  constructor(private authService: AuthserviceService, private router: Router,private userService:UserService) {}
 
   onLogin() {
-    this.subscription = this.authService.login(this.email, this.password).subscribe({
-      next: response => {
-        if(response.status == true){
-          this.router.navigate(['/Home']);
-        }
-         else{
-          alert("Email or password doesnt match");
-         }
-      },
     
-   });
- }
+      this.subscription = this.authService.login(this.email, this.password).subscribe({
+        next: response => {
+
+          if(response.status == true){
+            this.userService.setUserEmail(this.email);
+            this.router.navigate(['/Home']);
+          }
+           else{
+            this.errorMessage = response.message;
+            // alert("Email or password doesn't match!");
+           }
+          
+        },
+        error: error => {
+          console.error('Login failed', error);
+          this.errorMessage = "An error occurred during login";
+        }
+        
+      });
+    }
+  
+    ngOnDestroy() {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    }
 }

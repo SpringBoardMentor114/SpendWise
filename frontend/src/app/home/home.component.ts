@@ -189,8 +189,8 @@ export class HomeComponent implements OnInit {
 
   
 
-  firstName = 'Anisha';
-  lastName = 'Rani';
+  firstName = 'Om';
+  lastName = 'Tamrakar';
 
   selectedInterval: string = 'daily';
 

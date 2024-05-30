@@ -14,15 +14,14 @@ import { PassresetComponent } from './passreset/passreset.component';
 import { CMIComponent } from './cmi/cmi.component';
 import { LoggingComponent } from './expenses/logging/logging.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
-import { EditingComponent } from './expenses/editing/editing.component';
-import { FormsModule } from '@angular/forms';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+// import { EditingComponent } from './expenses/eimport { FormsModule } from '@angular/forms';
+
 
 // import { MatTableModule } from '@angular/material/table';
 // import { MatPaginatorModule } from '@angular/material/paginator';
 // import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
 
-import { ReactiveFormsModule } from '@angular/forms';
+
 import { HomeComponent } from './home/home.component'; 
 import { AddComponent } from './expenses/add/add.component';
 import { HeaderComponent } from './header/header.component';
@@ -45,7 +44,7 @@ const routes: Routes = [
   {path:'Login',component:LoginComponent},
   {path:'category-management', component:CategoryManagementFormComponent},
 
-  {path:'EDIT',component:EditingComponent},
+  // {path:'EDIT',component:EditingComponent},
   
 
  
@@ -64,7 +63,7 @@ const routes: Routes = [
     LoggingComponent,
     ExpenseListComponent,
     HomeComponent,
-    EditingComponent,
+    // EditingComponent,
     AddComponent,
 
    ExpenseManagementDashboardAppComponent,
@@ -82,8 +81,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     NgxChartsModule,
 
-    MatTableModule,
-    MatPaginatorModule,
+    // MatTableModule,
+    // MatPaginatorModule,
 
     HttpClientModule
   ],
