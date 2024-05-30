@@ -54,17 +54,34 @@ public class UserServiceImpl implements UserService{
                 .orElseThrow(() -> new ResourceNotFoundException("Sorry, no user found with the Id :" +id));
     }
 
+
+    @Override
+    public String getUserPasswordById(Long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            // Assuming password is stored as a hashed string
+            return user.getPassword();
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
     @Override
     public User updateUser(Long id, User user) {
-    User existingUser = userRepository.findById(id)
-                        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + id));
 
         if (!existingUser.getEmail().equals(user.getEmail())) {
             if (userAlreadyExists(user.getEmail())) {
                 throw new ResourceAlreadyExistsException("User already exists with the email: " + user.getEmail());
             }
         }
-        
+
         existingUser.setFirstName(user.getFirstName());
         existingUser.setLastName(user.getLastName());
         existingUser.setEmail(user.getEmail());
@@ -72,8 +89,25 @@ public class UserServiceImpl implements UserService{
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             existingUser.setPassword(encodedPassword);
         }
-        
+
         return userRepository.save(existingUser);
+    }
+
+    @Override
+    public User updateUserPassword(User user) {
+        User existingUser = userRepository.findByEmail(user.getEmail()); // Find user by email
+
+        if (existingUser == null) {
+            throw new ResourceNotFoundException("User does not exist with this e-mail.");
+        }
+
+        if (passwordEncoder.matches(user.getPassword(), existingUser.getPassword())) { // Check for new password match
+            throw new ResourceAlreadyExistsException("New password cannot be the same as the existing password");
+        }
+
+        String encodedPassword = passwordEncoder.encode(user.getPassword()); // Encode the new password
+        existingUser.setPassword(encodedPassword); // Update user password
+        return userRepository.save(existingUser); // Save the updated user and return it
     }
 
 

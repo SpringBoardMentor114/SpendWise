@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-category-management-form',
   templateUrl: './category-management-form.component.html',
-  styleUrl: './category-management-form.component.css'
+  styleUrls: ['./category-management-form.component.css'] 
 })
 export class CategoryManagementFormComponent {
   categories: { categoryId: number, categoryName: string, editing: boolean, newName?: string }[] = [];
