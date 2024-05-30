@@ -21,4 +21,9 @@ public interface UserService {
     List<User>viewUsers();
     void deleteUser(Long id);
     User getUserById(Long id);
+    User getUserByEmail(String email);
+    public User updateUserPassword(User user);
+
+    // This method needs to be implemented to retrieve the password securely (hashed password)
+    String getUserPasswordById(Long id);
 }
