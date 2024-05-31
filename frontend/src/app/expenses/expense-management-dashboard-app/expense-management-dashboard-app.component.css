@@ -1,49 +1,12 @@
 /* Global styles for the component */
-@import "@angular/material/prebuilt-themes/indigo-pink.css";
-* {
-    overflow: hidden;
-  }
-  body {
-    margin: 0;
-    padding: 0;
+:host {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #7abdfb 0%, #68c5ff 25%, #48b3ff 50%, #28b3fe 75%, #00b7ff 100%);
-  }
-
-  .container {
-    background: linear-gradient(to bottom right, #38B2AC, #c3b0b0);
-    box-shadow: 0 4px 8px rgba(255, 17, 17, 0.1);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
+    flex-direction: column;
+    height: 100%;
     padding: 20px;
-    width: 100%;
-    height: auto;
-    color: #000000;
-    transition: all 0.3s ease;
-    box-shadow: 
-    -6px 6px 0px 0px rgba(0, 0, 0, 0.2), /* Shaded shadow on the left side and down */
-    -8px 8px 0px 0px rgba(0, 0, 0, 0.214),
-    -10px 10px 0px 0px rgba(0, 0, 0, 0.282);  
+    box-sizing: border-box;
 }
-
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: 500;
-    color: rgb(255, 255, 255);
-    width: 100%; 
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 
-    0 0 20px rgba(255, 255, 255, 0.7), 
-    0 0 30px rgba(255, 255, 255, 0.7);
-    
-}
-
+ 
 /* Filter container styling */
 .filter-container {
     display: flex;
@@ -52,111 +15,82 @@ h1 {
     padding: 10px;
     margin-bottom: 20px; /* Adds some space below the filter section */
 }
-
-.filter-container select{
-    position: relative;
-    background-color: #ffffff;
-    font-weight: 700;
-    color: #000000;
-    margin: 0 20px 10px 0;
-    width: auto;
-    height: auto;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    float: left;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    box-shadow: 
-    -3px 6px 0px 0px rgba(0, 0, 0, 0.2),
-    -4px 4px 0px 0px rgba(0, 0, 0, 0.2);
+ 
+.filter-container select, .filter-container input {
+    margin-right: 10px; /* Spacing between elements */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }
-.filter-container select:hover {
-    background-color: #ffffff;
-}
-
-.filter-container input {
-    background-color: #ffffff;
-    position: relative;
-    width: auto;
-    height: auto;
-    color: #000000;
-    font-weight: 700;
-    margin: 0 5px 10px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-    box-shadow: 
-    -3px 6px 0px 0px rgba(0, 0, 0, 0.2),
-    -4px 4px 0px 0px rgba(0, 0, 0, 0.2); 
-}
-.filter-container input:hover {
-    background-color: #ffffff;
-}
-
-
+ 
 /* Responsive design for the filter container */
 @media (max-width: 600px) {
-.filter-container {
+    .filter-container {
         flex-direction: column; /* Stack vertically on smaller screens */
         align-items: start;
     }
-
+ 
     .filter-container select, .filter-container input {
+        margin-right: 0;
+        margin-bottom: 10px; /* Space between elements when stacked */
         width: 100%; /* Full width for easier touch input on mobile devices */
     }
 }
-
-/* Table container styling */
-
+ 
+/* Table styling */
 table {
-    height: auto;
     width: 100%;
     border-collapse: collapse;
 }
-
+ 
 th, td {
-    width: auto;
-    height: auto;
     text-align: left;
     padding: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border-top: #ffffff 3px solid;
-    border-left: #ffffff 3px solid;
+    border-bottom: 1px solid #ddd;
 }
-
+ 
 th {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: #f4f4f4;
 }
-
-td {
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+ 
+/* Button styling within table */
+button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
 }
-
-td[data-label]:before {
-    content: attr(data-label);
-    position: absolute;
-    left: 10px;
-    white-space: nowrap;
+ 
+button:hover {
+    opacity: 0.8;
 }
-
-#edit:hover,
-#delete:hover {
-    background-color: #00ff9d;
-}
-
-#edit:active,
-#delete:active {
-    box-shadow: inset 0 0 10px rgb(122, 44, 107);
-    color: black; 
-}
-
-#edit, #delete {
-    padding: 3px 6px; 
-    width: auto; 
+ 
+/* Additional responsiveness for the table */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+ 
+    th, td {
+        text-align: right;
+    }
+ 
+    td {
+        text-align: left;
+        position: relative;
+        padding-left: 50%;
+    }
+ 
+    td:before {
+        position: absolute;
+        left: 10px;
+        width: 45%; /* Adjust based on your preference */
+        padding-right: 10px;
+        white-space: nowrap;
+        content: attr(data-label); /* Using attribute from the data-label in td */
+    }
 }
 .pagination-controls {
     display: flex;
@@ -164,7 +98,7 @@ td[data-label]:before {
     align-items: center;
     padding: 10px;
 }
-
+ 
 .pagination-controls select, .pagination-controls button {
     margin: 0 5px;
     padding: 5px 10px;
