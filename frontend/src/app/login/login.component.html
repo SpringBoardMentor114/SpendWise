@@ -4,16 +4,22 @@
     <p>Welcome Back! Please Login with Your Credentials</p>
 
     <input type="email" id="email" name="email" [(ngModel)]="email" placeholder="Email" autocomplete="email">
-    <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password" autocomplete="current-password">
-     
-    <div *ngIf="errorMessage" class="error">
-      {{ errorMessage }}
+    <div *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)" class="error">
+      <div *ngIf="emailInput.errors?.['required']" class="text-red-600">Email is required.</div>
+      <div *ngIf="emailInput.errors?.['email']" class="text-red-600">Please enter a valid email address.</div>
     </div>
+    <input type="password" id="password" name="password" [(ngModel)]="password" placeholder="Password" autocomplete="current-password">
+    <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="error">
+      <div *ngIf="passwordInput.errors?.['required']" class="text-red-600">Password is required.</div>
+      <div *ngIf="passwordInput.errors?.['minlength']" class="text-red-600">
+        Password must be at least 8 characters long.
+      </div>
+    </div>
+    <div *ngIf="errorMessage" class="error text-red-600"><span>{{ errorMessage }}</span></div>
     <div class="forgetpass">
       <a routerLink="/PassReset">Forget Password</a>
     </div>
-
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
     
     <div class="signup"> 
       Don't Have an Account? <a routerLink="/Registration">Signup</a>

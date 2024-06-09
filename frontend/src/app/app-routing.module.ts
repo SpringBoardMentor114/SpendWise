@@ -6,6 +6,7 @@ import { EditingComponent } from './expenses/editing/editing.component';
 import { ExpenseListComponent } from './expenses/expense-list/expense-list.component';
 import { AddComponent } from './expenses/add/add.component';
 import { ExpenseManagementDashboardAppComponent } from './expenses/expense-management-dashboard-app/expense-management-dashboard-app.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
     {path:'spendwise/register/users', component: RegistrationComponent},
@@ -13,7 +14,6 @@ const routes: Routes = [
     {path:'spendwise/expense/edit/:id',component:EditingComponent},
     {path:'spendwise/expense/add',component:AddComponent},
     {path:'spendwise/expense/list',component:ExpenseListComponent},
-    {path:'spendwise/expense-dashboard', component:ExpenseManagementDashboardAppComponent},
 
 ];
 

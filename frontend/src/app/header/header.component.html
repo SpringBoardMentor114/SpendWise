@@ -6,7 +6,7 @@
     <ng-container *ngIf="renderAdditionalContent">
         <div class="navbar-right">
             <div class="user-info">
-                <span>Welcome, {{ firstName }}</span>
+                <span>Welcome, {{ firstName }}</span> <!-- This could be dynamically set based on the user's input -->
             </div>
         </div>
         <div class="user-info">
@@ -14,13 +14,13 @@
         </div>
     </ng-container>
 </div>
-<!-- <div class="sidebar" [ngClass]="{ 'active': isSidebarOpen }"> -->
-    <div class="sidebar" [ngClass]="{ 'active': isSidebarOpen && renderAdditionalContent }">
+
+<div class="sidebar" [ngClass]="{ 'active': isSidebarOpen && renderAdditionalContent }">
     <ul class="sidebar-menu">
         <hr>
         <br>
-        <li> First Name: {{ firstName }}</li>
-        <li>Last Name: {{ lastName }}</li>
+        <li>{{ firstName }} {{ lastName }}</li> <!-- Adjust as necessary to reflect the user's details -->
+        <li>{{ email }}</li>
         <br>
         <hr>
         <li><a routerLink="/PassReset">Change Password</a></li>
