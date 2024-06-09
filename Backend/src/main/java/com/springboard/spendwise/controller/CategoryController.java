@@ -6,6 +6,7 @@ import com.springboard.spendwise.model.Category;
 import com.springboard.spendwise.service.CategoryService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,26 +26,31 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public Category createCategory(@RequestBody Category category) {
         return categoryService.createCategory(category);
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Category> getAllCategory() {
         return categoryService.getCategories();
     }
 
     @GetMapping("/{categoryId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public Category getCategoryByCategoryId(@PathVariable Long categoryId){
         return categoryService.getCategoryByCategoryId(categoryId);
     }
 
     @DeleteMapping("/{categoryId}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteCategory(@PathVariable Long categoryId){
         categoryService.deleteCategory(categoryId);
     }
 
     @PostMapping("/{categoryId}/update")
+    @PreAuthorize("hasRole('ADMIN')")
     public Category updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
         return categoryService.updateCategory(categoryId, category);
     }
