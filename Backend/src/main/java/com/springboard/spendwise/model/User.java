@@ -41,4 +41,7 @@ public class User{
     @JsonIgnore
     private List<Expense> expenses;
 
+    @Column(name = "role")
+    private String role;
+
 }
